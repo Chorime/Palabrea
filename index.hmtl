@@ -1,1 +1,124 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palabrea</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            position: relative;
+            width: 1200px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .card {
+            width: 600px;
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.6s, opacity 0.6s;
+        }
+        .hidden {
+            opacity: 0;
+        }
+        .flipped {
+            transform: rotateY(180deg);
+        }
+        .image-card {
+            background-size: contain; /* Ensure the image fits well inside the card */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Prevent repeating the image */
+        }
+        .letter-card {
+            display: flex;
+            width: 600px;
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            align-items: stretch;
+        }
+        .section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: rgb(255, 255, 255);
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container" id="gameContainer">
+        <div class="card image-card" id="imageCard"></div>
+        <div class="card letter-card" id="letterCard">
+            <div class="section" id="section1"></div>
+            <div class="section" id="section2"></div>
+            <div class="section" id="section3"></div>
+        </div>
+    </div>
+    <button onclick="drawCard()">Draw Card</button>
+
+    <script>
+        let colors = ["red", "blue", "green"];
+        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+        let images = ["chicken.png", "city.png", "food.png", "world.png","character.png","profession.png", "object.png", "flower.png","movie.png","names.png"];
+        
+        function drawCard() {
+            let imageCard = document.getElementById("imageCard");
+            let section1 = document.getElementById("section1");
+            let section2 = document.getElementById("section2");
+            let section3 = document.getElementById("section3");
+            
+            let randomColor = colors[Math.floor(Math.random() * colors.length)];
+            let randomImage = images[Math.floor(Math.random() * images.length)];
+            
+            let chosenLetters = [
+                letters[Math.floor(Math.random() * letters.length)],
+                letters[Math.floor(Math.random() * letters.length)],
+                letters[Math.floor(Math.random() * letters.length)]
+            ];
+
+            // Randomize the letter colors
+            let letterColors = colors.slice(); // Copy the colors array
+            shuffle(letterColors); // Shuffle the array
+
+            // Set the background color of the cards
+            imageCard.style.backgroundColor = randomColor;
+            imageCard.style.backgroundImage = `url(${randomImage})`;
+            
+            section1.style.backgroundColor = letterColors[0];
+            section1.textContent = chosenLetters[0];
+            
+            section2.style.backgroundColor = letterColors[1];
+            section2.textContent = chosenLetters[1];
+            
+            section3.style.backgroundColor = letterColors[2];
+            section3.textContent = chosenLetters[2];
+        }
+
+        // Shuffle function to randomize an array
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+            }
+        }
+    </script>
+</body>
+</html>
