@@ -15,16 +15,19 @@
         }
         .game-container {
             position: relative;
-            width: 1200px;
-            height: 600px;
+            width: 90%;
+            max-width: 350px;
+            height: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 20px;
+            padding: 10px;
         }
         .card {
-            width: 600px;
-            height: 350px;
+            width: 100%;
+            max-width: 300px;
+            height: 250px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -32,6 +35,7 @@
             border-radius: 10px;
             cursor: pointer;
             transition: transform 0.6s, opacity 0.6s;
+            margin: 10px 0;
         }
         .hidden {
             opacity: 0;
@@ -46,8 +50,8 @@
         }
         .letter-card {
             display: flex;
-            width: 600px;
-            height: 250px;
+            width: 100%;
+            height: 150px;
             border-radius: 10px;
             overflow: hidden;
             align-items: stretch;
@@ -57,7 +61,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 24px;
+            font-size: 56px;
             color: rgb(255, 255, 255);
             height: 100%;
         }
@@ -72,10 +76,9 @@
             <div class="section" id="section3"></div>
         </div>
     </div>
-    <button onclick="drawCard()">Draw Card</button>
 
     <script>
-        let colors = ["red", "blue", "green"];
+        let colors = ["#32a88b", "#621569", "#1a09d9"];
         let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
         let images = ["chicken.png", "city.png", "food.png", "world.png","character.png","profession.png", "object.png", "flower.png","movie.png","names.png"];
         
@@ -119,6 +122,8 @@
                 [array[i], array[j]] = [array[j], array[i]]; // Swap elements
             }
         }
+
+        document.addEventListener("touchstart", drawCard);
     </script>
 </body>
 </html>
